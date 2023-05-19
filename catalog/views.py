@@ -6,5 +6,5 @@ def homepage(request):
     return render(request, 'catalog/homepage.html')
 
 
-def contact(request):
+def contacts(request):
     return render(request, 'catalog/contacts.html')
