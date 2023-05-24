@@ -9,6 +9,14 @@ class Category(models.Model):
     title = models.CharField(max_length=150, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
 
+    def __str__(self):
+        return f"{self.title}: {self.description}"
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+        ordering = ('title',)
+
 
 class Product(models.Model):
 
@@ -19,3 +27,11 @@ class Product(models.Model):
     price = models.FloatField(verbose_name='Цена')
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     last_change_date = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
+
+    def __str__(self):
+        return f"{self.title} {self.category} {self.price} {self.create_date}"
+
+    class Meta:
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
+        ordering = ('title',)
