@@ -12,7 +12,6 @@ class Command(BaseCommand):
             {'title': 'Аксессуары', 'description': 'Мужские и женские аксессуары'}
         ]
 
-
         Category.objects.all().delete()
 
         categories_for_create = []
