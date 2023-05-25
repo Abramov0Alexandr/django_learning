@@ -1,1 +1,65 @@
-[{"model": "catalog.category", "pk": 7, "fields": {"title": "Одежда", "description": "Мужская и женская зимняя одежда"}}, {"model": "catalog.category", "pk": 8, "fields": {"title": "Аксессуары", "description": "Мужские и женские аксессуары"}}, {"model": "catalog.product", "pk": 3, "fields": {"title": "Шапка", "description": "Мужские зимняя вязаня шапка", "image": "", "category": 7, "price": 200.0, "create_date": "2023-05-24T19:37:54.004Z", "last_change_date": "2023-05-24T19:37:54.004Z"}}, {"model": "catalog.product", "pk": 4, "fields": {"title": "Куртка зимняя", "description": "Мужские зимняя куртка утепленная", "image": "", "category": 7, "price": 14000.0, "create_date": "2023-05-24T19:38:54.894Z", "last_change_date": "2023-05-24T19:38:54.894Z"}}, {"model": "catalog.product", "pk": 5, "fields": {"title": "Перчатки", "description": "Мужские зимние перчатки", "image": "", "category": 7, "price": 3000.0, "create_date": "2023-05-24T19:39:28.834Z", "last_change_date": "2023-05-24T19:39:28.834Z"}}, {"model": "catalog.product", "pk": 6, "fields": {"title": "Очки", "description": "Женские солнцезащитные очки", "image": "", "category": 8, "price": 3200.0, "create_date": "2023-05-24T19:41:16.753Z", "last_change_date": "2023-05-24T19:41:16.753Z"}}, {"model": "catalog.product", "pk": 7, "fields": {"title": "Часы", "description": "Женские часы", "image": "", "category": 8, "price": 22000.0, "create_date": "2023-05-24T19:42:00.143Z", "last_change_date": "2023-05-24T19:42:00.143Z"}}]
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "title": "Мужская одежда",
+      "description": "Всесезонная мужская одежда"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "title": "Женская одежда",
+      "description": "Всесезонная женская одежда"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "title": "Аксессуары",
+      "description": "Мужские и женские аксессуары"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "title": "Зимняя куртка",
+      "description": "Зимняя утепленная мужская куртка",
+      "image": "",
+      "category": 1,
+      "price": 14000.0,
+      "create_date": "2023-05-25T12:37:51.106Z",
+      "last_change_date": "2023-05-25T12:37:51.106Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "title": "Платье",
+      "description": "Летнее платье",
+      "image": "",
+      "category": 2,
+      "price": 4200.0,
+      "create_date": "2023-05-25T12:37:51.106Z",
+      "last_change_date": "2023-05-25T12:37:51.106Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "title": "Наручные часы",
+      "description": "Механические мужские часы",
+      "image": "",
+      "category": 3,
+      "price": 23000.0,
+      "create_date": "2023-05-25T12:37:51.106Z",
+      "last_change_date": "2023-05-25T12:37:51.106Z"
+    }
+  }
+]
