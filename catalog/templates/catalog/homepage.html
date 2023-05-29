@@ -101,6 +101,10 @@
 
 
 
+
+
+
+
 </style>
 
 
@@ -181,13 +185,42 @@
     </nav>
 </div>
 
+<!--<main>-->
+<!--    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">-->
+<!--        {% for object in object_list %}-->
+<!--        <div class="col">-->
+<!--            <div class="card mb-4 rounded-3 shadow-sm">-->
+
+<!--                <div class="card">-->
+<!--                    <img class="rounded mx-auto d-block" src="{{ object.image.url }}" alt="Product Image" width="50%"-->
+<!--                         height="350">-->
+<!--                </div>-->
+
+<!--                <button type="button" class="btn btn-primary btn-sm">Перейти</button>-->
+
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">{{ object }}</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        {% endfor %}-->
+<!--    </div>-->
+
 <main>
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="row mb-3 text-center">
         {% for object in object_list %}
-        <div class="col">
+        <div class="col-12 col-md-4">
             <div class="card mb-4 rounded-3 shadow-sm">
 
-                <div class="card-body">
+                <div class="card">
+                    <img class="rounded mx-auto d-block" src="{{ object.image.url }}" alt="Product Image" width="50%"
+                         height="350">
+                </div>
+
+                <button type="button" class="btn btn-outline-primary">Перейти</button>
+
+                <div class="card-body card-body-sm">
                     <p class="card-text">{{ object }}</p>
                     <div class="d-flex justify-content-between align-items-center"></div>
                 </div>
@@ -195,6 +228,7 @@
         </div>
         {% endfor %}
     </div>
+</main>
 
 
 </main>
