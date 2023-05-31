@@ -10,11 +10,16 @@
                  height="350">
         </div>
 
-        <button type="button" class="btn btn-outline-primary">Перейти</button>
-
         <div class="card-body card-body-sm">
-            <p class="card-text">{{ object }}</p>
+
+            <p class="card-text">{{ object.title }}</p>
+            <p class="card-text">{{ object.description|truncatechars:100 }}</p>
+            <p class="card-text">{{ object.price }} рублей </p>
             <div class="d-flex justify-content-between align-items-center"></div>
+
+            <a href="{{ url 'catalog:product_info' object.pk }}" class="btn btn-outline-primary">Подробнее</a>
+
+
         </div>
     </div>
 </div>

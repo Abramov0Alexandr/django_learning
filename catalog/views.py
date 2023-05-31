@@ -10,10 +10,17 @@ def homepage(request):
         'title': 'SkyStore'
     }
 
-    return render(request, 'catalog/homepage.html', context)
+    return render(request, 'catalog/homepage.html', context=context)
 
 
 def contacts(request):
     return render(request, 'catalog/contacts.html', {'title': 'Контакты'})
 
+
+def product_info(request, pk):
+    product_item = Product.objects.get(pk=pk)
+    context = {
+        'product_list': Product.objects.filter(product_id=pk),
+    }
+    return render(request, 'catalog/homepage.html', context=context)
 
