@@ -12,11 +12,11 @@ class Command(BaseCommand):
 
         products_list = [
             {'title': 'Зимняя куртка', 'description': 'Зимняя утепленная мужская куртка',
-             'category': man_clothes, 'price': 14000.0},
+             'image': 'images/dress.jpg', 'category': man_clothes, 'price': 14000.0},
             {'title': 'Платье', 'description': 'Летнее платье',
-             'category': women_clothes, 'price': 4200.0},
+             'image': 'images/jacket.jpg', 'category': women_clothes, 'price': 4200.0},
             {'title': 'Наручные часы', 'description': 'Механические мужские часы',
-             'category': accessories, 'price': 23000.0}
+             'image': 'images/watch.jpg', 'category': accessories, 'price': 23000.0}
         ]
 
         Product.objects.all().delete()
