@@ -1,25 +1,11 @@
 from django.db import models
 
+from catalog.models.category import Category
 
 NULLABLE = {'blank': True, 'null': True}
 
 
-class Category(models.Model):
-
-    title = models.CharField(max_length=150, verbose_name='Наименование')
-    description = models.TextField(verbose_name='Описание')
-
-    def __str__(self):
-        return f"{self.title}"
-
-    class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
-        ordering = ('id',)
-
-
 class Product(models.Model):
-
     title = models.CharField(max_length=200, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
     image = models.ImageField(upload_to='images/', verbose_name='Превью', **NULLABLE)
@@ -37,4 +23,4 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
-        ordering = ('id',)
+        ordering = ('pk',)
