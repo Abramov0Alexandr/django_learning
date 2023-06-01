@@ -9,23 +9,26 @@
             <img class="rounded mx-auto d-block" src="{{ object.image|app_media }}" alt="Product Image" width="50%"
 
                  height="350">
-
         </div>
 
         <div class="card-body card-body-sm">
 
-            <p class="card-text">{{ object.title }}</p>
-            <p class="card-text">{{ object.description|truncatechars:100 }}</p>
-            <p class="card-text">{{ object.price }} рублей </p>
+            <article>
+                <p>{{ object.title }}</p>
+                <p>{{ object.content }}</p>
+                <p>{{ object.description }}</p>
+                <p>{{ object.category }}</p>
+                <p>{{ object.price }}</p>
+                <p>{{ object.create_date|date:'Y-m-d' }}</p>
+            </article>
             <div class="d-flex justify-content-between align-items-center"></div>
 
-
-            <a href="{% url 'product_info' object.pk %}" class="btn btn-outline-primary">Ссылка на товар</a>
+            <a href="{% url 'homepage' %}" class="btn btn-outline-primary">Назад</a>
 
 
         </div>
+
     </div>
 </div>
 {% endfor %}
 {% endblock %}
-
