@@ -1,12 +1,12 @@
 {% extends 'catalog/base_homepage.html' %}
-{% load my_tags %}
+{% load catalog_tags %}
 {% block content %}
 {% for object in object_list %}
 <div class="col-12 col-md-4">
     <div class="card mb-4 rounded-3 shadow-sm">
 
         <div class="card">
-            <img class="rounded mx-auto d-block" src="{{ object.image|app_media }}" alt="Product Image" width="50%"
+            <img class="rounded mx-auto d-block" src="{{ object.image|upload_media }}" alt="Product Image" width="50%"
 
                  height="350">
         </div>
