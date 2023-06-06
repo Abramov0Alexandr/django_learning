@@ -14,12 +14,12 @@
         <div class="card-body card-body-sm">
 
             <article>
-                <p>{{ object.title }}</p>
+                <p>Наименование товара: {{ object.title }}</p>
                 <p>{{ object.content }}</p>
-                <p>{{ object.description }}</p>
-                <p>{{ object.category }}</p>
-                <p>{{ object.price }}</p>
-                <p>{{ object.create_date|date:'Y-m-d' }}</p>
+                <p>Описание товара: {{ object.description }}</p>
+                <p>Категория товара: {{ object.category }}</p>
+                <p>Стоимость: {{ object.price }}</p>
+                <p>Дата публикации: {{ object.create_date|date:'Y-m-d' }}</p>
             </article>
             <div class="d-flex justify-content-between align-items-center"></div>
 

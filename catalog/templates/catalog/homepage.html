@@ -15,13 +15,13 @@
 
         <div class="card-body card-body-sm">
 
-            <p class="card-text">{{ object.title }}</p>
-            <p class="card-text">{{ object.description|truncatechars:100 }}</p>
-            <p class="card-text">{{ object.price }} рублей </p>
+            <p class="card-text"> {{ object.title }}</p>
+            <p class="card-text"> {{ object.description|truncatechars:100 }}</p>
+            <p class="card-text">Стоимость: {{ object.price }} рублей </p>
             <div class="d-flex justify-content-between align-items-center"></div>
 
 
-            <a href="{% url 'product_info' object.pk %}" class="btn btn-outline-primary">Посмотреть товар</a>
+            <a href="{% url 'product_info' object.slug %}" class="btn btn-outline-primary">Посмотреть товар</a>
 
 
         </div>
