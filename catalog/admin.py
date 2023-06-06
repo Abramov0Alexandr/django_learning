@@ -15,3 +15,4 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ('price',)
     list_filter = ('category',)
     search_fields = ('title', 'description',)
+    prepopulated_fields = {'slug': ('title',)}

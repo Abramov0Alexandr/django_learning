@@ -7,6 +7,7 @@ NULLABLE = {'blank': True, 'null': True}
 
 
 class Product(models.Model):
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     title = models.CharField(max_length=200, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
     image = models.ImageField(upload_to='images/', verbose_name='Превью', **NULLABLE)

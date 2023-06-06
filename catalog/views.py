@@ -20,9 +20,9 @@ def contacts(request):
     return render(request, 'catalog/contacts.html', {'title': 'Контакты'})
 
 
-def product_info(request, pk):
+def product_info(request, product_slug):
 
-    info = Product.objects.filter(pk=pk)
+    info = Product.objects.filter(slug=product_slug)
 
     if len(info) == 0:
         raise Http404
