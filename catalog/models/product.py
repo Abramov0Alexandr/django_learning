@@ -1,6 +1,4 @@
 from django.db import models
-from django.urls import reverse
-
 from catalog.models.category import Category
 
 NULLABLE = {'blank': True, 'null': True}
