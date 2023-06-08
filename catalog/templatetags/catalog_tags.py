@@ -1,5 +1,5 @@
 from django import template
-from catalog.models import Product
+from catalog.models import Product, FashionBlog
 
 
 register = template.Library()
@@ -18,4 +18,6 @@ def get_products():
     return Product.objects.all()
 
 
-
+@register.simple_tag()
+def get_blog_post():
+    return FashionBlog.objects.all()
