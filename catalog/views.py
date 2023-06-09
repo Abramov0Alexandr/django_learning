@@ -28,11 +28,11 @@ def product_info(request, product_slug):
     return render(request, 'catalog/product_detail.html', context=context)
 
 
-def blog(request):
+def fashion_blog(request):
     return render(request, 'catalog/blog.html', {'title': 'SkyStore Blog'})
 
 
-def fashion_blog(request, blog_slug):
+def blog_detail(request, blog_slug):
     context = {
         'object_list': FashionBlog.objects.filter(slug=blog_slug),
     }
