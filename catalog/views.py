@@ -6,7 +6,7 @@ from django.views import generic
 
 class IndexListView(generic.ListView):
     model = Product
-    template_name = 'catalog/index_list.html'
+    template_name = 'catalog/index.html'
     extra_context = {'title': 'SkyStore', }
 
 
@@ -30,6 +30,9 @@ class FashionBlogView(generic.ListView):
     template_name = 'catalog/blog.html'
     extra_context = {'title': 'SkyStore Blog'}
 
+    def get_queryset(self):
+        return FashionBlog.objects.filter(is_published=True)
+
 
 class BlogDetailView(generic.DetailView):
 
@@ -39,3 +42,14 @@ class BlogDetailView(generic.DetailView):
 
     def get_queryset(self):
         return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
+
+
+class BlogCreateView(generic.CreateView):
+    model = FashionBlog
+    fields = ('title', 'content', 'image', )
+    template_name = 'catalog/add_post.html'
+
+
+
+
+
