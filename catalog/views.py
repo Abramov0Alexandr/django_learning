@@ -1,40 +1,41 @@
 from django.http import Http404
 from django.shortcuts import render
 from catalog.models import Product, FashionBlog
+from django.views import generic
 
 
-def index(request):
-    context = {
-        'title': 'SkyStore',
-    }
+class IndexListView(generic.ListView):
+    model = Product
+    template_name = 'catalog/index_list.html'
+    extra_context = {'title': 'SkyStore', }
 
-    return render(request, 'catalog/index.html', context=context)
+
+class ProductDetailView(generic.DetailView):
+
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    # slug_field = 'slug'
+    slug_url_kwarg = 'product_slug'
+
+    def get_queryset(self):
+        return Product.objects.filter(slug=self.kwargs['product_slug'])
 
 
 def contacts(request):
     return render(request, 'catalog/contacts.html', {'title': 'Контакты'})
 
 
-def product_info(request, product_slug):
-
-    info = Product.objects.filter(slug=product_slug)
-
-    if len(info) == 0:
-        raise Http404
-
-    context = {
-        'object_list': info,
-    }
-    return render(request, 'catalog/product_detail.html', context=context)
+class FashionBlogView(generic.ListView):
+    model = FashionBlog
+    template_name = 'catalog/blog.html'
+    extra_context = {'title': 'SkyStore Blog'}
 
 
-def fashion_blog(request):
-    return render(request, 'catalog/blog.html', {'title': 'SkyStore Blog'})
+class BlogDetailView(generic.DetailView):
 
+    model = FashionBlog
+    template_name = 'catalog/blog_detail.html'
+    slug_url_kwarg = 'blog_slug'
 
-def blog_detail(request, blog_slug):
-    context = {
-        'object_list': FashionBlog.objects.filter(slug=blog_slug),
-    }
-
-    return render(request, 'catalog/blog_detail.html', context=context)
+    def get_queryset(self):
+        return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
