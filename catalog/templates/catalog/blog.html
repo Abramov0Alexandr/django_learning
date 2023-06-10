@@ -1,8 +1,7 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
 {% load catalog_tags %}
-{% get_blog_post as posts %}
-{% for object in posts %}
+{% for object in object_list %}
 <div class="card-body mb-4 rounded-3 shadow-sm">
 
     <div class="jumbotron jumbotron-fluid">

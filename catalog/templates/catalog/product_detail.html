@@ -1,7 +1,7 @@
 {% extends 'catalog/base.html' %}
 {% load catalog_tags %}
 {% block content %}
-{% for object in object_list %}
+{% if object %}
 
 <div class="container">
 
@@ -33,6 +33,5 @@
 </div>
 
 
-
-{% endfor %}
+{% endif %}
 {% endblock %}

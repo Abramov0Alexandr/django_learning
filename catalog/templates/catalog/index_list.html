@@ -1,8 +1,7 @@
 {% extends 'catalog/base.html' %}
 {% load catalog_tags %}
 {% block content %}
-{% get_products as products %}
-{% for object in products %}
+{% for object in object_list %}
 <div class="col-12 col-md-4">
     <div class="card mb-4 rounded-3 shadow-sm">
 
