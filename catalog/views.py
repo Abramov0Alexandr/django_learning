@@ -1,7 +1,7 @@
-from django.http import Http404
 from django.shortcuts import render
-from catalog.models import Product, FashionBlog
 from django.views import generic
+from catalog.forms import CreatePostForm
+from catalog.models import Product, FashionBlog
 
 
 class IndexListView(generic.ListView):
@@ -14,7 +14,6 @@ class ProductDetailView(generic.DetailView):
 
     model = Product
     template_name = 'catalog/product_detail.html'
-    # slug_field = 'slug'
     slug_url_kwarg = 'product_slug'
 
     def get_queryset(self):
@@ -34,6 +33,15 @@ class FashionBlogView(generic.ListView):
         return FashionBlog.objects.filter(is_published=True)
 
 
+class DevelopingPostsView(generic.ListView):
+    model = FashionBlog
+    template_name = 'catalog/developing_posts.html'
+    extra_context = {'title': 'В подготовке'}
+
+    def get_queryset(self):
+        return FashionBlog.objects.filter(is_published=False)
+
+
 class BlogDetailView(generic.DetailView):
 
     model = FashionBlog
@@ -44,10 +52,14 @@ class BlogDetailView(generic.DetailView):
         return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
 
 
-class BlogCreateView(generic.CreateView):
-    model = FashionBlog
-    fields = ('title', 'content', 'image', )
+class AddPostCreateView(generic.CreateView):
+    form_class = CreatePostForm
     template_name = 'catalog/add_post.html'
+    extra_context = {'title': 'Администрирование', }
+
+
+
+
 
 
 
