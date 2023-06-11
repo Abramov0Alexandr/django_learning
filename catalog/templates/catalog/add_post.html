@@ -1,0 +1,41 @@
+{% extends 'catalog/base.html' %}
+{% load catalog_tags %}
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                Добавление новой статьи в блог
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+
+                <form method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="card-body">
+
+                        <div class="alert alert-warning" role="alert">
+                            <strong>Внимание!</strong> Проверь статью перед публикацией.
+                            <button type="submit" class="btn btn-outline-success">Добавить статью</button>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+
+        <p class="lead"><br>{{ object.content }}</p>
+        <a href="{% url 'blog' %}" class="btn btn-outline-primary">Назад</a>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,11 +1,14 @@
 from django import template
 
+
 register = template.Library()
 
 
 @register.filter()
-def app_media(val):
-    if val:
-        return f'/media/{val}'
+def upload_media(image):
+    if image:
+        return f'/media/{image}'
 
     return '/static/coming_soon.jpg'
+
+

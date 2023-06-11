@@ -1,0 +1,37 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+{% load catalog_tags %}
+{% for object in object_list %}
+<div class="card-body mb-4 rounded-3 ">
+
+    <div class="jumbotron jumbotron-fluid">
+
+
+        <div class="container">
+
+
+            <div class="card">
+                <p class="card-text">
+                <h2>{{ object.title }}</h2>
+
+                <img class="rounded mx-auto d-block" src="{{ object.image|upload_media }}" alt="Post Image"
+                     width="50%"
+                     height="500">
+                <p class="lead"><br>{{ object.content|truncatechars:200 }}</p>
+
+
+                <div class="alert alert-warning" role="alert">
+                    <strong>Внимание!</strong> Проверь статью перед публикацией.
+                    <button type="submit" class="btn btn-outline-success">Опубликовать</button>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endblock %}
+

@@ -1,24 +1,73 @@
 from django.shortcuts import render
+from django.views import generic
+from catalog.forms import CreatePostForm
+from catalog.models import Product, FashionBlog
 
-from catalog.models import Product
+
+class IndexListView(generic.ListView):
+    model = Product
+    template_name = 'catalog/index.html'
+    extra_context = {'title': 'SkyStore', }
 
 
-def homepage(request):
-    products_list = Product.objects.all()
-    context = {
-        'object_list': products_list,
-        'title': 'SkyStore'
-    }
+class ProductDetailView(generic.DetailView):
 
-    return render(request, 'catalog/homepage.html', context=context)
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    slug_url_kwarg = 'product_slug'
+
+    def get_queryset(self):
+        return Product.objects.filter(slug=self.kwargs['product_slug'])
 
 
 def contacts(request):
     return render(request, 'catalog/contacts.html', {'title': 'Контакты'})
 
 
-def product_info(request, pk):
-    context = {
-        'object_list': Product.objects.filter(pk=pk),
-    }
-    return render(request, 'catalog/product_detail.html', context=context)
+class FashionBlogView(generic.ListView):
+    model = FashionBlog
+    template_name = 'catalog/blog.html'
+    extra_context = {'title': 'SkyStore Blog'}
+
+    def get_queryset(self):
+        return FashionBlog.objects.filter(is_published=True)
+
+
+class DevelopingPostsView(generic.ListView):
+    model = FashionBlog
+    template_name = 'catalog/developing_posts.html'
+    extra_context = {'title': 'В подготовке'}
+
+    def get_queryset(self):
+        return FashionBlog.objects.filter(is_published=False)
+
+
+class BlogDetailView(generic.DetailView):
+
+    model = FashionBlog
+    template_name = 'catalog/blog_detail.html'
+    slug_url_kwarg = 'blog_slug'
+
+    def get_queryset(self):
+        return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
+
+    def get_object(self, queryset=None):
+        post = super().get_object()
+        post.view_count += 1
+        post.save()
+        return post
+
+
+class AddPostCreateView(generic.CreateView):
+    form_class = CreatePostForm
+    template_name = 'catalog/add_post.html'
+    extra_context = {'title': 'Администрирование', }
+
+
+
+
+
+
+
+
+

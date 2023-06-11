@@ -1,15 +1,17 @@
 from django.db import models
-
+from django.urls import reverse_lazy
 from catalog.models.category import Category
+
 
 NULLABLE = {'blank': True, 'null': True}
 
 
 class Product(models.Model):
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     title = models.CharField(max_length=200, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
     image = models.ImageField(upload_to='images/', verbose_name='Превью', **NULLABLE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
     price = models.FloatField(verbose_name='Цена')
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     last_change_date = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
@@ -19,6 +21,9 @@ class Product(models.Model):
                f"Категория: {self.category}. " \
                f"Цена: {self.price}. " \
                f"Дата создания: {self.create_date}"
+
+    def get_absolute_url(self):
+        return reverse_lazy('product_info', kwargs={'product_slug': self.slug})
 
     class Meta:
         verbose_name = 'Продукт'
