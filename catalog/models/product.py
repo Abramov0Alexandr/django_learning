@@ -1,5 +1,7 @@
 from django.db import models
+from django.urls import reverse_lazy
 from catalog.models.category import Category
+
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -19,6 +21,9 @@ class Product(models.Model):
                f"Категория: {self.category}. " \
                f"Цена: {self.price}. " \
                f"Дата создания: {self.create_date}"
+
+    def get_absolute_url(self):
+        return reverse_lazy('product_info', kwargs={'product_slug': self.slug})
 
     class Meta:
         verbose_name = 'Продукт'

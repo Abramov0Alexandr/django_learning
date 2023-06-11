@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 
 
 NULLABLE = {'blank': True, 'null': True}
@@ -15,6 +16,9 @@ class FashionBlog(models.Model):
 
     def __str__(self):
         return f"Заголовок: {self.title}"
+
+    def get_absolute_url(self):
+        return reverse_lazy('blog_detail', kwargs={'blog_slug': self.slug})
 
     class Meta:
         verbose_name = 'Блог'
