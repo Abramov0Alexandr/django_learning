@@ -51,6 +51,12 @@ class BlogDetailView(generic.DetailView):
     def get_queryset(self):
         return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
 
+    def get_object(self, queryset=None):
+        post = super().get_object()
+        post.view_count += 1
+        post.save()
+        return post
+
 
 class AddPostCreateView(generic.CreateView):
     form_class = CreatePostForm
