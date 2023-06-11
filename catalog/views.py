@@ -24,7 +24,7 @@ def contacts(request):
     return render(request, 'catalog/contacts.html', {'title': 'Контакты'})
 
 
-class FashionBlogView(generic.ListView):
+class FashionBlogListView(generic.ListView):
     model = FashionBlog
     template_name = 'catalog/blog.html'
     extra_context = {'title': 'SkyStore Blog'}
@@ -33,7 +33,7 @@ class FashionBlogView(generic.ListView):
         return FashionBlog.objects.filter(is_published=True)
 
 
-class DevelopingPostsView(generic.ListView):
+class DevelopingPostsListView(generic.ListView):
     model = FashionBlog
     template_name = 'catalog/developing_posts.html'
     extra_context = {'title': 'В подготовке'}
