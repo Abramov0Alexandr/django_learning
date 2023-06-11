@@ -6,9 +6,7 @@
 
     <div class="jumbotron jumbotron-fluid">
 
-
         <div class="container">
-
 
             <div class="card">
                 <p class="card-text">
@@ -17,8 +15,11 @@
                 <img class="rounded mx-auto d-block" src="{{ object.image|upload_media }}" alt="Post Image"
                      width="50%"
                      height="500">
-                <p class="lead"><br>{{ object.content|truncatechars:200 }}</p>
-
+                <p class="lead"> Содержание: <br>{{ object.content|truncatechars:200 }}</p>
+                <p class="lead"><br>{% if not object.is_published %}
+                    Признак публикации: Пост не опубликован
+                    {% endif %}
+                </p>
 
                 <div class="alert alert-warning" role="alert">
                     <strong>Внимание!</strong> Проверь статью перед публикацией.
