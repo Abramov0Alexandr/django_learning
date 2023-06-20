@@ -1,5 +1,8 @@
 {% extends 'catalog/base.html' %}
 {% load catalog_tags %}
+{% block title %}
+{{ object.title }}
+{% endblock %}
 {% block content %}
 {% if object %}
 

@@ -1,4 +1,7 @@
 {% extends 'catalog/base.html' %}
+{% block title %}
+В редакции
+{% endblock %}
 {% block content %}
 {% load catalog_tags %}
 {% for object in object_list %}
@@ -23,7 +26,7 @@
 
                 <div class="alert alert-warning" role="alert">
                     <strong>Внимание!</strong> Проверь статью перед публикацией.
-                    <button type="submit" class="btn btn-outline-success">Опубликовать</button>
+                    <a href="" type="submit" class="btn btn-outline-success">Перейти к проверке</a>
                 </div>
 
             </div>

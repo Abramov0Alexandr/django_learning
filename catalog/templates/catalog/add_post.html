@@ -1,5 +1,8 @@
 {% extends 'catalog/base.html' %}
 {% load catalog_tags %}
+{% block title %}
+Добавить статью
+{% endblock %}
 {% block content %}
 
 <div class="jumbotron jumbotron-fluid">
@@ -32,8 +35,7 @@
             </div>
         </div>
 
-
-        <p class="lead"><br>{{ object.content }}</p>
+        <br>
         <a href="{% url 'blog' %}" class="btn btn-outline-primary">Назад</a>
 
     </div>
