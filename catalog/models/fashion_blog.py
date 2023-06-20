@@ -2,7 +2,6 @@ from django.db import models
 from django.urls import reverse_lazy
 from slugify import slugify
 
-# from django.template.defaultfilters import slugify
 
 NULLABLE = {'blank': True, 'null': True}
 

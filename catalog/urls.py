@@ -3,6 +3,7 @@ from catalog.views import IndexListView, contacts, \
     ProductDetailView, FashionBlogListView, BlogDetailView, \
     AddPostCreateView, DevelopingPostsListView
 
+
 urlpatterns = [
     path('', IndexListView.as_view(), name='homepage'),
     path('contacts/', contacts, name='contacts'),
