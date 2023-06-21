@@ -25,7 +25,7 @@ class Product(models.Model):
                f"Дата создания: {self.create_date}"
 
     def get_absolute_url(self):
-        return reverse_lazy('product_info', kwargs={'product_slug': self.slug})
+        return reverse_lazy('catalog:product_info', kwargs={'product_slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:
