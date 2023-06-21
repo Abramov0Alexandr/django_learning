@@ -4,6 +4,9 @@ from catalog.views import IndexListView, contacts, \
     AddPostCreateView, DevelopingPostsListView
 
 
+app_name = 'catalog'
+
+
 urlpatterns = [
     path('', IndexListView.as_view(), name='homepage'),
     path('contacts/', contacts, name='contacts'),
