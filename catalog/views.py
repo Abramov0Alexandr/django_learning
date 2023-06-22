@@ -58,6 +58,16 @@ class AddPostCreateView(generic.CreateView):
     extra_context = {'title': 'Администрирование', }
 
 
+class ReleasePostUpdateView(generic.UpdateView):
+    model = FashionBlog
+    form_class = CreatePostForm
+    template_name = 'catalog/add_post.html'
+    extra_context = {'title': 'Администрирование', }
+    slug_url_kwarg = 'blog_slug'
+
+    def get_queryset(self):
+        return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
+
 
 
 
