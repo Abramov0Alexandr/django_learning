@@ -13,14 +13,6 @@ class CreatePostForm(forms.ModelForm):
         }
 
 
-class ReleasePostForm(forms.ModelForm):
-
-    class Meta:
-        model = FashionBlog
-        exclude = ('slug', 'created_at', 'view_count',)
-        widgets = {'is_published': forms.CheckboxInput(),
-                   'title': forms.TextInput(attrs={'value': FashionBlog.title}),
-                   }
 
 
 
