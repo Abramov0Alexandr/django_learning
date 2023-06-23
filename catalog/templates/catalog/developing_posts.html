@@ -19,10 +19,7 @@
                      width="50%"
                      height="500">
                 <p class="lead"> Содержание: <br>{{ object.content|truncatechars:200 }}</p>
-                <p class="lead"><br></p>
-                {% if not object.is_published %}
-                    Признак публикации: Пост не опубликован
-                {% endif %}
+                <p class="lead">Признак публикации: Пост не опубликован<br></p>
 
                 <div class="alert alert-warning" role="alert">
                     <strong>Внимание!</strong> Проверь статью перед публикацией.
