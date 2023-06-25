@@ -20,8 +20,8 @@ class ProductDetailView(generic.DetailView):
         return Product.objects.filter(slug=self.kwargs['product_slug'])
 
 
-def contacts(request):
-    return render(request, 'catalog/contacts.html', {'title': 'Контакты'})
+class ContactsView(generic.TemplateView):
+    template_name = 'catalog/contacts.html'
 
 
 class FashionBlogListView(generic.ListView):
