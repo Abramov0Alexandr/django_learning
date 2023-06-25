@@ -21,7 +21,7 @@
                         <a class="nav-link active" aria-current="page" href="{% url 'catalog:homepage' %}">Каталог</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'catalog:blog' %}">Наш блог</a>
+                        <a class="nav-link" href="{% url 'blog:blog' %}">Наш блог</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'catalog:contacts' %}">Контакты</a>
@@ -32,12 +32,12 @@
                             Администрирование
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'catalog:blog_create' %}">Добавить статью</a></li>
+                            <li><a class="dropdown-item" href="{% url 'blog:blog_create' %}">Добавить статью</a></li>
 
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="{% url 'catalog:developing_posts' %}">Статьи в редакции</a></li>
+                            <li><a class="dropdown-item" href="{% url 'blog:developing_posts' %}">Статьи в редакции</a></li>
 
                             <li>
                                 <hr class="dropdown-divider">

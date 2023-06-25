@@ -19,7 +19,7 @@ class FashionBlog(models.Model):
         return f"Заголовок: {self.title}"
 
     def get_absolute_url(self):
-        return reverse_lazy('catalog:blog_detail', kwargs={'blog_slug': self.slug})
+        return reverse_lazy('blog:blog_detail', kwargs={'blog_slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -30,3 +30,4 @@ class FashionBlog(models.Model):
         verbose_name = 'Блог'
         verbose_name_plural = 'Блог'
         ordering = ('pk',)
+

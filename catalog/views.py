@@ -1,7 +1,5 @@
-from django.shortcuts import render
 from django.views import generic
-from catalog.forms import CreatePostForm
-from catalog.models import Product, FashionBlog
+from catalog.models import Product
 
 
 class IndexListView(generic.ListView):
@@ -22,56 +20,3 @@ class ProductDetailView(generic.DetailView):
 
 class ContactsView(generic.TemplateView):
     template_name = 'catalog/contacts.html'
-
-
-class FashionBlogListView(generic.ListView):
-    queryset = FashionBlog.objects.filter(is_published=True)
-    template_name = 'catalog/blog.html'
-    extra_context = {'title': 'SkyStore Blog'}
-
-
-class DevelopingPostsListView(generic.ListView):
-    queryset = FashionBlog.objects.filter(is_published=False)
-    template_name = 'catalog/developing_posts.html'
-    extra_context = {'title': 'В подготовке'}
-
-
-class BlogDetailView(generic.DetailView):
-
-    model = FashionBlog
-    template_name = 'catalog/blog_detail.html'
-    slug_url_kwarg = 'blog_slug'
-
-    def get_queryset(self):
-        return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
-
-    def get_object(self, queryset=None):
-        post = super().get_object()
-        post.view_count += 1
-        post.save()
-        return post
-
-
-class AddPostCreateView(generic.CreateView):
-    form_class = CreatePostForm
-    template_name = 'catalog/add_post.html'
-    extra_context = {'title': 'Администрирование', }
-
-
-class ReleasePostUpdateView(generic.UpdateView):
-    model = FashionBlog
-    form_class = CreatePostForm
-    template_name = 'catalog/add_post.html'
-    extra_context = {'title': 'Администрирование', }
-    slug_url_kwarg = 'blog_slug'
-
-    def get_queryset(self):
-        return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
-
-
-
-
-
-
-
-
