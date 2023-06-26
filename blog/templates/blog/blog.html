@@ -18,13 +18,13 @@ SkyStore Blog
                 <h2>{{ object.title }}</h2>
 
                 <img class="rounded mx-auto d-block" src="{{ object.image|upload_media }}" alt="Post Image"
-                     width="50%"
-                     height="500">
+                     width="30%"
+                     height="60%">
 
                 <p class="text-black-50">Количество просмотров: {{ object.view_count }}</p>
 
 
-                <a href="{{ object.get_absolute_url }}" class="btn btn-outline-primary">Читать статью</a>
+                <a href="{% url 'blog:blog_detail' object.slug %}" class="btn btn-outline-primary">Читать статью</a>
             </div>
 
 

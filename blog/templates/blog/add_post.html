@@ -4,40 +4,55 @@
 Добавить статью
 {% endblock %}
 {% block content %}
+<div class="col">
+    <div class="d-flex justify-content-around align-items-fluid">
+        <div class="container ">
+            <div class="card-body card-body-sm ">
 
-<div class="jumbotron jumbotron-fluid">
+                <div class="card-body ">
+                    Добавление новой статьи в блог
+                </div>
 
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                Добавление новой статьи в блог
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
 
                 <form method="post" enctype="multipart/form-data">
-
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <div class="card-body">
-
-                        <div class="alert alert-warning" role="alert">
-                            <strong>Внимание!</strong> Проверь статью перед публикацией.</div>
-                            <div><button type="submit" class="btn btn-outline-success">Опубликовать статью</button>
-                        </div>
-
+                    <div class="alert alert-warning" role="alert">
+                        <strong>Внимание!</strong> Проверь статью перед публикацией.
                     </div>
-
+                    <div>
+                        <button type="submit" class="btn btn-outline-success">Опубликовать статью</button>
+                    </div>
                 </form>
-
             </div>
         </div>
-
-        <br>
-        <a href="{% url 'blog:blog' %}" class="btn btn-outline-primary">Назад</a>
-
     </div>
 </div>
+</div>
+</div>
+
+
+<!--        <div class="card">-->
+<!--            <div class="card-body">-->
+<!--                -->
+<!--                <form method="post" enctype="multipart/form-data">-->
+
+<!--                    {% csrf_token %}-->
+<!--                    {{ form.as_p }}-->
+
+<!--                    <div class="card-body">-->
+<!--                        <div class="alert alert-warning" role="alert">-->
+<!--                            <strong>Внимание!</strong> Проверь статью перед публикацией.-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <button type="submit" class="btn btn-outline-success">Опубликовать статью</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        <a href="{% url 'blog:developing_posts' %}" class="btn btn-outline-primary">Назад</a>-->
+<!--    </div>-->
+<!--</div>-->
 {% endblock %}

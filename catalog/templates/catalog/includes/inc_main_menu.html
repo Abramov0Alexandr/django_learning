@@ -1,55 +1,38 @@
 {% load static %}
-<nav class="navbar bg-body-tertiary" aria-label="Light offcanvas navbar">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'catalog:homepage' %}">
-            <img src="{% static 'touch_icon.png' %}" alt="ShortCutIcon" width="20%" height="20%"> SkyStore
-        </a>
+<header class="p-3 mb-3 border-bottom">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+                <img src="{% static 'touch_icon.png' %}" alt="My Logo" width="40" height="40" class="me-2">
+                </svg>
+            </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight"
-                aria-controls="offcanvasNavbarLight" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbarLight"
-             aria-labelledby="offcanvasNavbarLightLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel">SkyStore</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'catalog:homepage' %}">Каталог</a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="{% url 'catalog:homepage' %}" class="nav-link px-2 link-secondary">Главная</a></li>
+                <li><a href="{% url 'blog:blog' %}" class="nav-link px-2 link-body-emphasis">Наш блог</a></li>
+                <li><a href="{% url 'catalog:contacts' %}" class="nav-link px-2 link-body-emphasis">Контакты</a></li>
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            </form>
+
+            <div class="dropdown text-end">
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                    <img src="https://github.com/Abramov0Alexandr.png" alt="mdo" width="32" height="32"
+                         class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small">
+                    <li><a class="dropdown-item" href="{% url 'blog:blog_create' %}">Добавить статью...</a></li>
+                    <li><a class="dropdown-item" href="{% url 'blog:developing_posts' %}">Статьи в редакции</a></li>
+                    <li><a class="dropdown-item" href="{% url 'catalog:contacts' %}">Контакты</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'blog:blog' %}">Наш блог</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'catalog:contacts' %}">Контакты</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Администрирование
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'blog:blog_create' %}">Добавить статью</a></li>
-
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="{% url 'blog:developing_posts' %}">Статьи в редакции</a></li>
-
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Скоро появится!</a></li>
-
-
-                        </ul>
-                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
                 </ul>
-
             </div>
         </div>
     </div>
-</nav>
+</header>
