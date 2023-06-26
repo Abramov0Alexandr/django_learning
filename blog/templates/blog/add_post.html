@@ -21,7 +21,13 @@
                         <strong>Внимание!</strong> Проверь статью перед публикацией.
                     </div>
                     <div>
+                        {% if object %}
                         <button type="submit" class="btn btn-outline-success">Опубликовать статью</button>
+                        <a href="{% url 'blog:developing_posts' %}" class="btn btn-outline-primary">Отмена</a>
+                        {% else %}
+                        <button type="submit" class="btn btn-outline-success">Добавить статью</button>
+                        <a href="{% url 'blog:blog' %}" class="btn btn-outline-primary" >Отмена</a>
+                        {% endif %}
                     </div>
                 </form>
             </div>

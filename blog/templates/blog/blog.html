@@ -9,9 +9,7 @@ SkyStore Blog
 
     <div class="jumbotron jumbotron-fluid">
 
-
         <div class="container">
-
 
             <div class="card">
                 <p class="card-text">
@@ -23,11 +21,13 @@ SkyStore Blog
 
                 <p class="text-black-50">Количество просмотров: {{ object.view_count }}</p>
 
+                <div class="btn-group btn-group-sm" role="group" aria-label="Button group">
+                    <a href="{% url 'blog:blog_detail' object.slug %}" class="btn btn-outline-primary">Читать статью</a>
+                    <a href="{% url 'blog:release_post' object.slug %}" class="btn btn-outline-primary">Редактировать статью</a>
+                </div>
 
-                <a href="{% url 'blog:blog_detail' object.slug %}" class="btn btn-outline-primary">Читать статью</a>
+
             </div>
-
-
         </div>
     </div>
 </div>
