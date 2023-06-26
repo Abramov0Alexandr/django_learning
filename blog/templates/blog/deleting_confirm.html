@@ -1,0 +1,31 @@
+{% extends 'catalog/base.html' %}
+{% load catalog_tags %}
+{% block title %}
+Удалить статью
+{% endblock %}
+{% block content %}
+<div class="col">
+    <div class="d-flex justify-content-around align-items-fluid">
+        <div class="container ">
+            <div class="card-body card-body-sm ">
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-danger">Подтверждение удаления</h4>
+                            <h6 class="card-subtitle mb-2">Внимание!</h6>
+                            Происходит удаление блога "{{ object.title }}"
+                            <p class="card-text">
+                                Удаленный пост не подлежит восстановлению, убедитесь в необходимости удаления
+                            </p>
+                            <button type="submit" class="btn btn-outline-success">Подтвердить удаление</button>
+                            <a href="{% url 'blog:developing_posts' %}" class="btn btn-outline-primary">Отмена</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

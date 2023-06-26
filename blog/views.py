@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.views import generic
 from blog.forms import CreatePostForm
 from blog.models import FashionBlog
@@ -43,6 +44,16 @@ class ReleasePostUpdateView(generic.UpdateView):
     template_name = 'blog/add_post.html'
     extra_context = {'title': 'Администрирование', }
     slug_url_kwarg = 'blog_slug'
+
+    def get_queryset(self):
+        return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
+
+
+class PostDeleteView(generic.DeleteView):
+    model = FashionBlog
+    template_name = 'blog/deleting_confirm.html'
+    slug_url_kwarg = 'blog_slug'
+    success_url = reverse_lazy('blog:developing_posts')
 
     def get_queryset(self):
         return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
