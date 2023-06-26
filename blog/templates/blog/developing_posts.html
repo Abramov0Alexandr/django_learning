@@ -25,6 +25,7 @@
                     <strong>Внимание!</strong> Проверь статью перед публикацией.
                     <a href="{% url 'blog:release_post' object.slug %}" type="submit"
                        class="btn btn-outline-success">Перейти к проверке</a>
+                    <a href="{% url 'blog:post_delete' object.slug %}" class="btn btn-outline-danger">Удалить</a>
                 </div>
 
             </div>
@@ -33,14 +34,14 @@
 </div>
 {% endfor %}
 {% if not object_list %}
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">SkyStore Blog</h4><br>
-            <h6 class="card-subtitle mb-2 text-muted">Тут будут отображаться неопубликованные посты</h6>
-            <p class="card-text">
-                В данный момент неопубликованных постов нет
-            </p>
-        </div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">SkyStore Blog</h4><br>
+        <h6 class="card-subtitle mb-2 text-muted">Тут будут отображаться неопубликованные посты</h6>
+        <p class="card-text">
+            В данный момент неопубликованных постов нет
+        </p>
     </div>
+</div>
 {% endif %}
 {% endblock %}

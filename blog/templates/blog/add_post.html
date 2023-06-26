@@ -22,7 +22,7 @@
                     </div>
                     <div>
                         {% if object %}
-                        <button type="submit" class="btn btn-outline-success">Опубликовать статью</button>
+                        <button type="submit" class="btn btn-outline-success">Сохранить изменения</button>
                         <a href="{% url 'blog:developing_posts' %}" class="btn btn-outline-primary">Отмена</a>
                         {% else %}
                         <button type="submit" class="btn btn-outline-success">Добавить статью</button>
@@ -34,31 +34,4 @@
         </div>
     </div>
 </div>
-</div>
-</div>
-
-
-<!--        <div class="card">-->
-<!--            <div class="card-body">-->
-<!--                -->
-<!--                <form method="post" enctype="multipart/form-data">-->
-
-<!--                    {% csrf_token %}-->
-<!--                    {{ form.as_p }}-->
-
-<!--                    <div class="card-body">-->
-<!--                        <div class="alert alert-warning" role="alert">-->
-<!--                            <strong>Внимание!</strong> Проверь статью перед публикацией.-->
-<!--                        </div>-->
-<!--                        <div>-->
-<!--                            <button type="submit" class="btn btn-outline-success">Опубликовать статью</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <br>-->
-<!--        <a href="{% url 'blog:developing_posts' %}" class="btn btn-outline-primary">Назад</a>-->
-<!--    </div>-->
-<!--</div>-->
 {% endblock %}
