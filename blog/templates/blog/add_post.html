@@ -1,7 +1,11 @@
 {% extends 'catalog/base.html' %}
 {% load catalog_tags %}
 {% block title %}
+{% if object %}
+Редактировать статью
+{% else %}
 Добавить статью
+{% endif %}
 {% endblock %}
 {% block content %}
 <div class="col">
