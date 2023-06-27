@@ -6,27 +6,32 @@
 {% block content %}
 {% if object %}
 
-<div class="container">
+<div class="col">
+    <div class="d-flex justify-content-around align-items-fluid">
+        <div class="container ">
+            <div class="card-body card-body-sm ">
 
-    <div class="card">
-        <img class="rounded mx-auto d-block" src="{{ object.image|upload_media }}" alt="Product Image"
-             width="30%"
-             height="60%">
-    </div>
+                <div class="card">
+                    <img class="rounded mx-auto d-block" src="{{ object.image|upload_media }}" alt="Product Image"
+                         width="30%"
+                         height="60%">
+                </div>
 
-    <div class="card-body card-body-sm">
+                <div class="card-body card-body-sm">
 
-        <article>
-            <p>Наименование товара: {{ object.title }}</p>
-            <p>{{ object.content }}</p>
-            <p>Описание товара: {{ object.description }}</p>
-            <p>Категория товара: {{ object.category }}</p>
-            <p>Стоимость: {{ object.price }}</p>
-            <p>Дата публикации: {{ object.create_date|date:'d.m.Y' }}</p>
-        </article>
+                    <article>
+                        <p>Наименование товара: {{ object.title }}</p>
+                        <p>{{ object.content }}</p>
+                        <p>Описание товара: {{ object.description }}</p>
+                        <p>Категория товара: {{ object.category }}</p>
+                        <p>Стоимость: {{ object.price }}</p>
+                        <p>Дата публикации: {{ object.create_date|date:'d.m.Y' }}</p>
+                    </article>
 
-        <a href="{% url 'catalog:homepage' %}" class="btn btn-outline-primary">Назад</a>
-
+                    <a href="{% url 'catalog:homepage' %}" class="btn btn-outline-primary">Назад</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endif %}

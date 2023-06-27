@@ -1,0 +1,44 @@
+{% extends 'catalog/base.html' %}
+{% load catalog_tags %}
+{% block title %}
+{% if object %}
+Редактировать товар
+{% else %}
+Добавить товар
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="col">
+    <div class="d-flex justify-content-around align-items-fluid">
+        <div class="container ">
+            <div class="card-body card-body-sm ">
+
+                <div class="card-header">
+                    {% if object %}
+                    Редактирование товара
+                    {% else %}
+                    Добавление нового товара
+                    {% endif %}
+
+                </div>
+
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div>
+                        <button type="submit" class="btn btn-outline-success">
+                            {% if object %}
+                            Сохранить изменения
+                            {% else %}
+                            Добавить товар
+                            {% endif %}
+                        </button>
+                        <a href="{% url 'catalog:homepage' %}" class="btn btn-outline-primary">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

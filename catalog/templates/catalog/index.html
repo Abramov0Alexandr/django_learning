@@ -25,9 +25,10 @@ SkyStore
                             <p class="card-text"> {{ object.description|truncatechars:100 }}</p>
                             <p class="card-text">Стоимость: {{ object.price }} рублей </p>
 
-
-                            <a href="{{ object.get_absolute_url }}" class="btn btn-outline-primary">Посмотреть
-                                товар</a>
+                            <div class="btn-group" role="group" aria-label="Button group">
+                                <a href="{{ object.get_absolute_url }}" class="btn btn-outline-primary">Посмотреть товар</a>
+                                <a href="{% url 'catalog:edit_product' object.slug %}" class="btn btn-outline-warning">Редактировать</a>
+                            </div>
 
                         </div>
                     </div>
