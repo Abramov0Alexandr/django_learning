@@ -10,4 +10,11 @@ class CreatePostForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-input'}),
             'content': forms.Textarea(attrs={'cols': 100, 'rows': 10}),
+            'is_published': forms.NullBooleanSelect(),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
