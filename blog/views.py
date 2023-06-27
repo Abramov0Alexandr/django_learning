@@ -1,4 +1,5 @@
-from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 from blog.forms import CreatePostForm
 from blog.models import FashionBlog
@@ -57,3 +58,16 @@ class PostDeleteView(generic.DeleteView):
 
     def get_queryset(self):
         return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
+
+
+def toggle_published_status(request, blog_slug):
+    post = get_object_or_404(FashionBlog, slug=blog_slug)
+
+    if post.is_published:
+        post.is_published = False
+    else:
+        post.is_published = True
+
+    post.save()
+
+    return redirect(reverse('blog:developing_posts'))

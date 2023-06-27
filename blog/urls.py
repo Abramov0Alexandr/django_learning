@@ -12,5 +12,6 @@ urlpatterns = [
     path('<slug:blog_slug>/', views.BlogDetailView.as_view(), name='blog_detail'),
     path('edite/<slug:blog_slug>/', views.ReleasePostUpdateView.as_view(), name='release_post'),
     path('developing_posts/delete/<slug:blog_slug>', views.PostDeleteView.as_view(), name='post_delete'),
+    path('activity/<slug:blog_slug>', views.toggle_published_status, name='toggle_published_status'),
 
 ]

@@ -25,6 +25,7 @@
                     <strong>Внимание!</strong> Проверь статью перед публикацией.
                     <a href="{% url 'blog:release_post' object.slug %}" type="submit"
                        class="btn btn-outline-success">Перейти к проверке</a>
+                    <a href="{% url 'blog:toggle_published_status' object.slug %}" class="btn btn-outline-warning">Опубликовать</a>
                     <a href="{% url 'blog:post_delete' object.slug %}" class="btn btn-outline-danger">Удалить</a>
                 </div>
 
