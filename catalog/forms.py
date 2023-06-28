@@ -55,3 +55,10 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
             'version_title': forms.TextInput(attrs={'class': 'form-input'}),
             'version_number': forms.NumberInput(),
         }
+
+    # def clean_version_status(self):
+    #     cleaned_data = self.cleaned_data['is_active']
+    #
+    #
+    #     print(cleaned_data)
+    #     return cleaned_data

@@ -29,10 +29,10 @@ class ProductCreateView(generic.CreateView):
 
     form_class = CreateProductForm
     template_name = 'catalog/create_product.html'
-    slug_url_kwarg = 'product_slug'
 
     def get_success_url(self):
-        return reverse('catalog:product_info', args=[self.kwargs.get('product_slug')])
+        product = self.object
+        return reverse('catalog:product_info', args=[product.slug])
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
