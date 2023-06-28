@@ -20,6 +20,6 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Version)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'version', 'version_title', 'version_status', )
+    list_display = ('pk', 'version_number', 'version_title', 'is_active', )
     list_display_links = ('version_title',)
-    list_editable = ('version_status', )
+    list_editable = ('is_active', )

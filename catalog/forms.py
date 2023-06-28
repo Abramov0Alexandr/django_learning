@@ -12,6 +12,17 @@ class StyleFormMixin:
             field.widget.attrs['class'] = 'form-control'
 
 
+class CustomNullBooleanSelect(forms.NullBooleanSelect):
+    def __init__(self, attrs=None):
+        choices = (
+            ("unknown", "Не указано"),
+            ("true", "Активна"),
+            ("false", "Не активна"),
+        )
+        super().__init__(attrs=attrs)
+        self.choices = choices
+
+
 class CreateProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
@@ -34,24 +45,13 @@ class CreateProductForm(StyleFormMixin, forms.ModelForm):
         return cleaned_data
 
 
-class CustomNullBooleanSelect(forms.NullBooleanSelect):
-    def __init__(self, attrs=None):
-        choices = (
-            ("unknown", "Не указано"),
-            ("true", "Активна"),
-            ("false", "Не активна"),
-        )
-        super().__init__(attrs=attrs)
-        self.choices = choices
-
-
 class VersionForm(StyleFormMixin, forms.ModelForm):
-    version_status = forms.BooleanField(widget=CustomNullBooleanSelect, label='Признак активности')
+    is_active = forms.BooleanField(widget=CustomNullBooleanSelect, label='Признак активности')
 
     class Meta:
         model = Version
         fields = '__all__'
         widgets = {
             'version_title': forms.TextInput(attrs={'class': 'form-input'}),
-            'version': forms.NumberInput(),
+            'version_number': forms.NumberInput(),
         }
