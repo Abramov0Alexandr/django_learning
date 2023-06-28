@@ -52,7 +52,7 @@ class ReleasePostUpdateView(generic.UpdateView):
 
 class PostDeleteView(generic.DeleteView):
     model = FashionBlog
-    template_name = 'blog/deleting_confirm.html'
+    template_name = 'blog/confirm_delete_blog.html'
     slug_url_kwarg = 'blog_slug'
     success_url = reverse_lazy('blog:developing_posts')
 
