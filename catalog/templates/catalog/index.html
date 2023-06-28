@@ -1,5 +1,8 @@
 {% extends 'catalog/base.html' %}
 {% load catalog_tags %}
+{% block title %}
+SkyStore
+{% endblock %}
 {% block content %}
 {% for object in object_list %}
 <div class="col-12 col-md-4">
@@ -22,9 +25,12 @@
                             <p class="card-text"> {{ object.description|truncatechars:100 }}</p>
                             <p class="card-text">Стоимость: {{ object.price }} рублей </p>
 
+                            <div class="btn-group" role="group" aria-label="Button group">
+                                <a href="{{ object.get_absolute_url }}" class="btn btn-outline-primary">Посмотреть товар</a>
+                                <a href="{% url 'catalog:edit_product' object.slug %}" class="btn btn-outline-warning">Редактировать</a>
+                                <a href="{% url 'catalog:delete_product' object.slug %}" class="btn btn-outline-danger">Удалить</a>
 
-                            <a href="{{ object.get_absolute_url }}" class="btn btn-outline-primary">Посмотреть
-                                товар</a>
+                            </div>
 
                         </div>
                     </div>
@@ -36,4 +42,3 @@
 
 {% endfor %}
 {% endblock %}
-

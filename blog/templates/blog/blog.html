@@ -1,0 +1,47 @@
+{% extends 'catalog/base.html' %}
+{% block title %}
+SkyStore Blog
+{% endblock %}
+{% block content %}
+{% load catalog_tags %}
+{% for object in object_list %}
+<div class="card-body mb-4 rounded-3 ">
+
+    <div class="jumbotron jumbotron-fluid">
+
+        <div class="container">
+
+            <div class="card">
+                <p class="card-text">
+                <h2>{{ object.title }}</h2>
+
+                <img class="rounded mx-auto d-block" src="{{ object.image|upload_media }}" alt="Post Image"
+                     width="30%"
+                     height="60%">
+
+                <p class="text-black-50">Количество просмотров: {{ object.view_count }}</p>
+
+                <div class="btn-group btn-group-sm" role="group" aria-label="Button group">
+                    <a href="{% url 'blog:blog_detail' object.slug %}" class="btn btn-outline-primary">Читать
+                        статью</a>
+                    <a href="{% url 'blog:toggle_published_status' object.slug %}" class="btn btn-outline-primary">Снять
+                        с публикации</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% if not object_list %}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">SkyStore Blog</h4><br>
+        <h6 class="card-subtitle mb-2 text-muted">Тут будут отображаться все опубликованные статьи</h6>
+        <p class="card-text">
+            В данный момент Опубликованный статей нет
+        </p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+

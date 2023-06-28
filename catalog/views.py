@@ -1,11 +1,12 @@
-from django.shortcuts import render
+from django.forms import inlineformset_factory
+from django.urls import reverse, reverse_lazy
 from django.views import generic
-from catalog.forms import CreatePostForm
-from catalog.models import Product, FashionBlog
+from catalog.forms import CreateProductForm, VersionForm
+from catalog.models import Product, Version
 
 
 class IndexListView(generic.ListView):
-    model = Product
+    queryset = Product.objects.all()
     template_name = 'catalog/index.html'
     extra_context = {'title': 'SkyStore', }
 
@@ -20,54 +21,86 @@ class ProductDetailView(generic.DetailView):
         return Product.objects.filter(slug=self.kwargs['product_slug'])
 
 
-def contacts(request):
-    return render(request, 'catalog/contacts.html', {'title': 'Контакты'})
+class ContactsView(generic.TemplateView):
+    template_name = 'catalog/contacts.html'
 
 
-class FashionBlogListView(generic.ListView):
-    model = FashionBlog
-    template_name = 'catalog/blog.html'
-    extra_context = {'title': 'SkyStore Blog'}
+class ProductCreateView(generic.CreateView):
+
+    form_class = CreateProductForm
+    template_name = 'catalog/create_product.html'
+
+    def get_success_url(self):
+        product = self.object
+        return reverse('catalog:product_info', args=[product.slug])
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+
+        if self.request.method == 'POST':
+            formset = VersionFormset(self.request.POST, instance=self.object)
+
+        else:
+            formset = VersionFormset(instance=self.object)
+
+        context_data['formset'] = formset
+        return context_data
+
+    def form_valid(self, form):
+        context_data = self.get_context_data()
+        formset = context_data['formset']
+        self.object = form.save()
+
+        if formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+
+        return super().form_valid(form)
+
+
+class ProductUpdateView(generic.UpdateView):
+
+    form_class = CreateProductForm
+    template_name = 'catalog/create_product.html'
+    slug_url_kwarg = 'product_slug'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+
+        if self.request.method == 'POST':
+            formset = VersionFormset(self.request.POST, instance=self.object)
+
+        else:
+            formset = VersionFormset(instance=self.object)
+
+        context_data['formset'] = formset
+        return context_data
+
+    def form_valid(self, form):
+        context_data = self.get_context_data()
+        formset = context_data['formset']
+        self.object = form.save()
+
+        if formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+
+        return super().form_valid(form)
 
     def get_queryset(self):
-        return FashionBlog.objects.filter(is_published=True)
+        return Product.objects.filter(slug=self.kwargs['product_slug'])
+
+    def get_success_url(self):
+        return reverse('catalog:edit_product', args=[self.kwargs.get('product_slug')])
 
 
-class DevelopingPostsListView(generic.ListView):
-    model = FashionBlog
-    template_name = 'catalog/developing_posts.html'
-    extra_context = {'title': 'В подготовке'}
-
-    def get_queryset(self):
-        return FashionBlog.objects.filter(is_published=False)
-
-
-class BlogDetailView(generic.DetailView):
-
-    model = FashionBlog
-    template_name = 'catalog/blog_detail.html'
-    slug_url_kwarg = 'blog_slug'
+class ProductDeleteView(generic.DeleteView):
+    model = Product
+    template_name = 'catalog/confirm_delete_product.html'
+    slug_url_kwarg = 'product_slug'
+    success_url = reverse_lazy('catalog:homepage')
 
     def get_queryset(self):
-        return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
-
-    def get_object(self, queryset=None):
-        post = super().get_object()
-        post.view_count += 1
-        post.save()
-        return post
-
-
-class AddPostCreateView(generic.CreateView):
-    form_class = CreatePostForm
-    template_name = 'catalog/add_post.html'
-    extra_context = {'title': 'Администрирование', }
-
-
-
-
-
-
-
-
-
+        return Product.objects.filter(slug=self.kwargs['product_slug'])

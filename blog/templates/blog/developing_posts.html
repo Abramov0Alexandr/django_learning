@@ -1,0 +1,48 @@
+{% extends 'catalog/base.html' %}
+{% load catalog_tags %}
+{% block title %}
+В редакции
+{% endblock %}
+{% block content %}
+{% for object in object_list %}
+<div class="card-body mb-4 rounded-3 ">
+
+    <div class="jumbotron jumbotron-fluid">
+
+        <div class="container">
+
+            <div class="card">
+                <p class="card-text">
+                <h2>{{ object.title }}</h2>
+
+                <img class="rounded mx-auto d-block" src="{{ object.image|upload_media }}" alt="Post Image"
+                     width="30%"
+                     height="90%">
+                <p class="lead"> Содержание: <br>{{ object.content|truncatechars:200 }}</p>
+                <p class="lead">Признак публикации: Пост не опубликован<br></p>
+
+                <div class="alert alert-warning" role="alert">
+                    <strong>Внимание!</strong> Проверь статью перед публикацией.
+                    <a href="{% url 'blog:release_post' object.slug %}" type="submit"
+                       class="btn btn-outline-success">Перейти к проверке</a>
+                    <a href="{% url 'blog:toggle_published_status' object.slug %}" class="btn btn-outline-warning">Опубликовать</a>
+                    <a href="{% url 'blog:post_delete' object.slug %}" class="btn btn-outline-danger">Удалить</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% if not object_list %}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">SkyStore Blog</h4><br>
+        <h6 class="card-subtitle mb-2 text-muted">Тут будут отображаться неопубликованные посты</h6>
+        <p class="card-text">
+            В данный момент неопубликованных постов нет
+        </p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

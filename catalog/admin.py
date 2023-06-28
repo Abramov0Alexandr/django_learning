@@ -1,5 +1,5 @@
 from django.contrib import admin
-from catalog.models import Product, Category, FashionBlog
+from catalog.models import Product, Category, Version
 
 
 @admin.register(Category)
@@ -18,10 +18,8 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 
-@admin.register(FashionBlog)
-class FashionBlogAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'title', 'is_published', 'view_count')
-    list_display_links = ('title',)
-    list_editable = ('is_published',)
-    search_fields = ('title', 'content',)
-    prepopulated_fields = {'slug': ('title',)}
+@admin.register(Version)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'version_number', 'version_title', 'is_active', )
+    list_display_links = ('version_title',)
+    list_editable = ('is_active', )

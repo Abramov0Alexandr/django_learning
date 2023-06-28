@@ -2,7 +2,6 @@ from django.db import models
 from django.urls import reverse_lazy
 from slugify import slugify
 
-# from django.template.defaultfilters import slugify
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -20,14 +19,23 @@ class FashionBlog(models.Model):
         return f"Заголовок: {self.title}"
 
     def get_absolute_url(self):
-        return reverse_lazy('blog_detail', kwargs={'blog_slug': self.slug})
+        # return reverse_lazy('blog:blog_detail', kwargs={'blog_slug': self.slug}) - если в контроллере слаг
+        if self.is_published:
+            return reverse_lazy('blog:blog')
+        else:
+            return reverse_lazy('blog:developing_posts')
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+
+        if self.slug != slugify(self.title):
+            self.slug = slugify(self.title)
+
         return super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Блог'
         verbose_name_plural = 'Блог'
         ordering = ('pk',)
+

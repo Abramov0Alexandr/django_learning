@@ -12,9 +12,9 @@ class Product(models.Model):
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     title = models.CharField(max_length=200, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
-    image = models.ImageField(upload_to='images/', verbose_name='Превью', **NULLABLE)
+    image = models.ImageField(upload_to='images/catalog', verbose_name='Превью', **NULLABLE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
-    price = models.FloatField(verbose_name='Цена')
+    price = models.IntegerField(verbose_name='Цена')
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     last_change_date = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
 
@@ -25,7 +25,7 @@ class Product(models.Model):
                f"Дата создания: {self.create_date}"
 
     def get_absolute_url(self):
-        return reverse_lazy('product_info', kwargs={'product_slug': self.slug})
+        return reverse_lazy('catalog:product_info', kwargs={'product_slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:

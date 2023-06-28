@@ -1,0 +1,41 @@
+{% extends 'catalog/base.html' %}
+{% load catalog_tags %}
+{% block title %}
+{% if object %}
+Редактировать статью
+{% else %}
+Добавить статью
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="col">
+    <div class="d-flex justify-content-around align-items-fluid">
+        <div class="container ">
+            <div class="card-body card-body-sm ">
+
+                <div class="card-body ">
+                    Добавление новой статьи в блог
+                </div>
+
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="alert alert-warning" role="alert">
+                        <strong>Внимание!</strong> Проверь статью перед публикацией.
+                    </div>
+                    <div>
+                        {% if object %}
+                        <button type="submit" class="btn btn-outline-success">Сохранить изменения</button>
+                        <a href="{% url 'blog:developing_posts' %}" class="btn btn-outline-primary">Отмена</a>
+                        {% else %}
+                        <button type="submit" class="btn btn-outline-success">Добавить статью</button>
+                        <a href="{% url 'blog:blog' %}" class="btn btn-outline-primary" >Отмена</a>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

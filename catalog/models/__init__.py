@@ -1,9 +1,10 @@
 __all__ = [
     'Category',
     'Product',
-    'FashionBlog',
+    'Version',
     ]
 
 from .category import Category
 from .product import Product
-from .fashion_blog import FashionBlog
+from .version import Version
+
