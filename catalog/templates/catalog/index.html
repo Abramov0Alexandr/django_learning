@@ -28,6 +28,8 @@ SkyStore
                             <div class="btn-group" role="group" aria-label="Button group">
                                 <a href="{{ object.get_absolute_url }}" class="btn btn-outline-primary">Посмотреть товар</a>
                                 <a href="{% url 'catalog:edit_product' object.slug %}" class="btn btn-outline-warning">Редактировать</a>
+                                <a href="{% url 'catalog:delete_product' object.slug %}" class="btn btn-outline-danger">Удалить</a>
+
                             </div>
 
                         </div>
