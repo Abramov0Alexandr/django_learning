@@ -8,37 +8,47 @@
 {% endif %}
 {% endblock %}
 {% block content %}
-<div class="col">
-    <div class="d-flex justify-content-around align-items-fluid">
-        <div class="container ">
-            <div class="card-body card-body-sm ">
+<form method="post" enctype="multipart/form-data">
 
+    <div class="col-12">
+        <div class="d-flex justify-content-around align-items-fluid">
+            <div class="card">
                 <div class="card-header">
                     {% if object %}
                     Редактирование товара
                     {% else %}
                     Добавление нового товара
                     {% endif %}
-
                 </div>
 
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div>
+                    <button type="submit" class="btn btn-outline-success">
+                        {% if object %}
+                        Сохранить изменения
+                        {% else %}
+                        Добавить товар
+                        {% endif %}
+                    </button>
+                    <a href="{% url 'catalog:homepage' %}" class="btn btn-outline-primary">Назад</a>
+                </div>
+            </div>
 
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <div>
-                        <button type="submit" class="btn btn-outline-success">
-                            {% if object %}
-                            Сохранить изменения
-                            {% else %}
-                            Добавить товар
-                            {% endif %}
-                        </button>
-                        <a href="{% url 'catalog:homepage' %}" class="btn btn-outline-primary">Отмена</a>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        Версия продукта
                     </div>
-                </form>
+                    <div class="card-body">
+                        {{ formset.management_form }}
+                        {% for form in formset.forms %}
+                        {{ form.as_p }}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+</form>
+
 {% endblock %}
