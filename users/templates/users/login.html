@@ -1,0 +1,14 @@
+{% extends "catalog/base.html" %}
+{% block title %}Авторизация{% endblock %}
+{% block content %}
+<h1>Авторизация</h1>
+<p>Пожалуйста, заполните поля для авторизации:</p>
+<div class="login-form">
+    <form action="{% url 'users:login' %}" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}"/>
+        <p><input type="submit" value="Войти"></p>
+    </form>
+</div>
+{% endblock %}
