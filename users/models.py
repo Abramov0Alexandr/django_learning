@@ -15,6 +15,7 @@ class User(AbstractUser):
     country = models.CharField(max_length=35, verbose_name='Страна', **NULLABLE)
     email = models.EmailField(unique=True, verbose_name='Электронная почта')
 
+    is_active = models.BooleanField(default=False, verbose_name='Активирован')
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
