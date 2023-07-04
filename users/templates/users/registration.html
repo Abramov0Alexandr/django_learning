@@ -79,10 +79,10 @@
         {{ form.as_p }}
         {% csrf_token %}
         <input type="submit" value="Зарегистрироваться">
-    </form>
     <div class="container">
         <a href="{% url 'catalog:homepage' %}" class="btn btn-outline-primary">Отменить</a>
     </div>
+    </form>
 </div>
 </body>
 </html>

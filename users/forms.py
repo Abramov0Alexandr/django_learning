@@ -7,7 +7,11 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password1', 'password2',)
+        is_active = False
+        fields = ('first_name', 'last_name', 'patronymic', 'email', 'password1', 'password2',)
+        help_texts = {
+            'patronymic': 'Данное поле опционально',
+        }
         error_messages = {
             'email': {
                 'unique': "Указанная электронная почта уже используется.",
