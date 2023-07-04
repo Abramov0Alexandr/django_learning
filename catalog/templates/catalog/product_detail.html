@@ -25,7 +25,9 @@
                         <p>Описание товара: {{ object.description }}</p>
                         <p>Категория товара: {{ object.category }}</p>
                         <p>Стоимость: {{ object.price }}</p>
-                        <p>Дата публикации: {{ object.create_date|date:'d.m.Y' }}</p>
+                        <p>Дата публикации: {{ object.create_date|date:'d.m.Y' }}</p><br>
+                        <p>Владелец: {{ object.product_owner|default:"Не указан" }}</p>
+
                     </article>
                     <a href="{% url 'catalog:homepage' %}" class="btn btn-outline-primary">Назад</a>
 

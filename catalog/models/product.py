@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from slugify import slugify
 
 from catalog.models.category import Category
-
+from config import settings
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -17,6 +17,10 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='Цена')
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     last_change_date = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
+
+    product_owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='Владелец', **NULLABLE
+    )
 
     def __str__(self):
         return f"Наименование товара: {self.title}. " \
