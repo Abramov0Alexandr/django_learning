@@ -16,7 +16,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, verbose_name='Электронная почта')
 
     is_active = models.BooleanField(default=False, verbose_name='Активирован')
+    verification_key = models.CharField(default='Не верифицирован', verbose_name='Ключ активации')
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
-
 
