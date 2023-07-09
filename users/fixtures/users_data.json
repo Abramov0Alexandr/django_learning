@@ -1,14 +1,79 @@
 [
 {
     "model": "users.user",
-    "pk": 1,
+    "pk": 2,
     "fields": {
-        "password": "pbkdf2_sha256$600000$gXIy0AyAGHQLlPmBdaqXgq$nXDfJ+lGY6MEK32H9qfq4ATetepOJ3OL9ZWSi7iR41M=",
-        "last_login": "2023-07-04T08:47:38.767Z",
+        "password": "pbkdf2_sha256$600000$zSCOyDmUUMYS7mqMhjERi6$WyGXAQLJMUcmsWnPQbYIMfv5fYcdzxn37DVwZOvX/b4=",
+        "last_login": "2023-07-04T17:29:02.552Z",
+        "is_superuser": false,
+        "is_staff": false,
+        "date_joined": "2023-07-04T08:09:43Z",
+        "first_name": "Александр",
+        "last_name": "Иванов",
+        "patronymic": "Андреевич",
+        "avatar": "images/users/avatar.jpeg",
+        "phone_number": "79921110000",
+        "country": "Россия",
+        "email": "django@test.ru",
+        "is_active": true,
+        "verification_key": "Не верифицирован",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$F3KScWGS7orjs5QNeoMdoH$4TWv4CVbvlbZ9uQB/DVRCRhAz8Pr35+prqKHCwaaYCY=",
+        "last_login": null,
+        "is_superuser": false,
+        "is_staff": false,
+        "date_joined": "2023-07-04T13:36:43.271Z",
+        "first_name": "Сидр",
+        "last_name": "Иванов",
+        "patronymic": null,
+        "avatar": "",
+        "phone_number": null,
+        "country": null,
+        "email": "test_new@test.ru",
+        "is_active": true,
+        "verification_key": "Не верифицирован",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 18,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$pCuut1WmxUw4IZAQjzkPB9$BZC6t/Kn74Xpb3TdNl9Ic5PTQV32ChYEURPaY+wvfIg=",
+        "last_login": "2023-07-09T09:42:22.187Z",
+        "is_superuser": false,
+        "is_staff": false,
+        "date_joined": "2023-07-09T08:31:41.326Z",
+        "first_name": "Александр",
+        "last_name": "Иванов",
+        "patronymic": null,
+        "avatar": "",
+        "phone_number": null,
+        "country": null,
+        "email": "Alexandr.abramovv@gmail.com",
+        "is_active": true,
+        "verification_key": "951434586519385101532",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 20,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$fmWZgYvytljoB4hVsGxREC$hUbCiZn47MK7RW+QsqrrnipQMr44azZSz4/AkQ7+vyM=",
+        "last_login": null,
         "is_superuser": true,
         "is_staff": true,
-        "is_active": true,
-        "date_joined": "2023-07-03T21:02:59Z",
+        "date_joined": "2023-07-09T09:28:35.547Z",
         "first_name": "Admin",
         "last_name": "django_learning",
         "patronymic": null,
@@ -16,27 +81,8 @@
         "phone_number": null,
         "country": null,
         "email": "admin@project.org",
-        "groups": [],
-        "user_permissions": []
-    }
-},
-{
-    "model": "users.user",
-    "pk": 2,
-    "fields": {
-        "password": "pbkdf2_sha256$600000$zSCOyDmUUMYS7mqMhjERi6$WyGXAQLJMUcmsWnPQbYIMfv5fYcdzxn37DVwZOvX/b4=",
-        "last_login": "2023-07-04T13:01:36.457Z",
-        "is_superuser": false,
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2023-07-04T08:09:43Z",
-        "first_name": "Иванов",
-        "last_name": "Александр",
-        "patronymic": "Андреевич",
-        "avatar": "images/users/avatar.jpeg",
-        "phone_number": "79921110000",
-        "country": "Россия",
-        "email": "django@test.ru",
+        "is_active": false,
+        "verification_key": "Не верифицирован",
         "groups": [],
         "user_permissions": []
     }
