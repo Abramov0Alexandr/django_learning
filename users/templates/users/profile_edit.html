@@ -1,88 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 5px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            color: #333333;
-            text-align: center;
-            margin-top: 0;
-        }
-
-        p {
-            color: #666666;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-bottom: 10px;
-            color: #333333;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #cccccc;
-            margin-bottom: 20px;
-        }
-
-        input[type="submit"],
-        input[type="reset"] {
-            background-color: #4CAF50;
-            color: #ffffff;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover,
-        input[type="reset"]:hover {
-            background-color: #45a049;
-        }
-
-
-    </style>
-</head>
-<body>
+{% extends "catalog/base.html" %}
+{% block title %}Аккаунт{% endblock %}
+{% block content %}
 <div class="container">
-    <h1>Редактирование профиля</h1>
-    <p>Чтобы зарегистрировать новый аккаунт, пожалуйста, заполните форму:</p>
-    <form method="post" enctype="multipart/form-data">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <input type="submit" value="Сохранить изменения">
-    </form>
-    <div class="container">
-        <a href="{% url 'catalog:homepage' %}" class="btn btn-outline-primary">На главную</a>
+    <div class="card-title">
+        <h1>Редактирование профиля</h1>
+        <p>Чтобы зарегистрировать новый аккаунт, пожалуйста, заполните форму:</p>
     </div>
+
+    <form method="post" enctype="multipart/form-data">
+
+        <div class="card-body">
+            {{ form.as_p }}
+            {% csrf_token %}
+        </div>
+
+        <div class="card-footer">
+            <div class="btn-group btn-group-sm" role="group" aria-label="Button group">
+                <input type="submit" value="Сохранить изменения">
+                <a href="{% url 'catalog:homepage' %}" class="btn btn-outline-primary">На главную</a>
+                <a href="{% url 'users:gen_password' %}" class="btn btn-outline-primary">Получить новый пароль</a>
+            </div>
+        </div>
+    </form>
 </div>
-</body>
-</html>
+{% endblock %}
