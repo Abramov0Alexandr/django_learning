@@ -1,0 +1,26 @@
+{% extends "catalog/base.html" %}
+{% block title %}Аккаунт{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card-title">
+        <h1>Редактирование профиля</h1>
+        <p>Чтобы зарегистрировать новый аккаунт, пожалуйста, заполните форму:</p>
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+
+        <div class="card-body">
+            {{ form.as_p }}
+            {% csrf_token %}
+        </div>
+
+        <div class="card-footer">
+            <div class="btn-group btn-group-sm" role="group" aria-label="Button group">
+                <input type="submit" value="Сохранить изменения">
+                <a href="{% url 'catalog:homepage' %}" class="btn btn-outline-primary">На главную</a>
+                <a href="{% url 'users:gen_password' %}" class="btn btn-outline-primary">Получить новый пароль</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

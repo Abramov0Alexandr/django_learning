@@ -1,0 +1,44 @@
+[
+{
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$gXIy0AyAGHQLlPmBdaqXgq$nXDfJ+lGY6MEK32H9qfq4ATetepOJ3OL9ZWSi7iR41M=",
+        "last_login": "2023-07-04T08:47:38.767Z",
+        "is_superuser": true,
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-07-03T21:02:59Z",
+        "first_name": "Admin",
+        "last_name": "django_learning",
+        "patronymic": null,
+        "avatar": "",
+        "phone_number": null,
+        "country": null,
+        "email": "admin@project.org",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$zSCOyDmUUMYS7mqMhjERi6$WyGXAQLJMUcmsWnPQbYIMfv5fYcdzxn37DVwZOvX/b4=",
+        "last_login": "2023-07-04T13:01:36.457Z",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-07-04T08:09:43Z",
+        "first_name": "Иванов",
+        "last_name": "Александр",
+        "patronymic": "Андреевич",
+        "avatar": "images/users/avatar.jpeg",
+        "phone_number": "79921110000",
+        "country": "Россия",
+        "email": "django@test.ru",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

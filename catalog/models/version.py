@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class Version(models.Model):
@@ -15,3 +16,12 @@ class Version(models.Model):
 
     def __str__(self):
         return f"{self.version_title} {self.product}"
+
+    def clean(self) -> None:
+
+        super().clean()
+        if Version.objects.filter(
+                product=self.product,
+                is_active=True
+        ).exists():
+            raise ValidationError('Вы можете установить только одну активную версию')

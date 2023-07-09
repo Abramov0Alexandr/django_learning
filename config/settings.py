@@ -31,15 +31,16 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'users.apps.UsersConfig',
+    'catalog.apps.CatalogConfig',
+    'blog.apps.BlogConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'catalog.apps.CatalogConfig',
-    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
@@ -105,6 +106,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# E-mail server configuration
+# https://docs.djangoproject.com/en/4.2/topics/email/
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'alexandr.abramovv@gmail.com'
+EMAIL_HOST_PASSWORD = 'nmmpdgdfxbasnrup'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -139,3 +150,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 FIXTURE_DIRS = [BASE_DIR / 'fixtures']
+
+
+# Substituting a custom User model
+# https://docs.djangoproject.com/en/4.2/ref/settings/#std-setting-AUTH_USER_MODEL
+
+AUTH_USER_MODEL = 'users.User'
+
+
+# Authentication configue
+LOGIN_REDIRECT_URL = 'catalog:homepage'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
