@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic
@@ -11,7 +13,7 @@ class FashionBlogListView(generic.ListView):
     extra_context = {'title': 'SkyStore Blog'}
 
 
-class DevelopingPostsListView(generic.ListView):
+class DevelopingPostsListView(LoginRequiredMixin, generic.ListView):
     queryset = FashionBlog.objects.filter(is_published=False)
     template_name = 'blog/developing_posts.html'
     extra_context = {'title': 'В подготовке'}
@@ -33,13 +35,13 @@ class BlogDetailView(generic.DetailView):
         return post
 
 
-class AddPostCreateView(generic.CreateView):
+class AddPostCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = CreatePostForm
     template_name = 'blog/add_post.html'
     extra_context = {'title': 'Администрирование', }
 
 
-class ReleasePostUpdateView(generic.UpdateView):
+class ReleasePostUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = FashionBlog
     form_class = CreatePostForm
     template_name = 'blog/add_post.html'
@@ -50,7 +52,7 @@ class ReleasePostUpdateView(generic.UpdateView):
         return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
 
 
-class PostDeleteView(generic.DeleteView):
+class PostDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = FashionBlog
     template_name = 'blog/confirm_delete_blog.html'
     slug_url_kwarg = 'blog_slug'
@@ -60,6 +62,7 @@ class PostDeleteView(generic.DeleteView):
         return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
 
 
+@login_required
 def toggle_published_status(request, blog_slug):
     post = get_object_or_404(FashionBlog, slug=blog_slug)
 

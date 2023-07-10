@@ -160,5 +160,5 @@ AUTH_USER_MODEL = 'users.User'
 
 # Authentication configue
 LOGIN_REDIRECT_URL = 'catalog:homepage'
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
+LOGIN_URL = 'users:login'
+LOGOUT_URL = 'users:logout'

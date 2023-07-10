@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -25,7 +26,7 @@ class ContactsView(generic.TemplateView):
     template_name = 'catalog/contacts.html'
 
 
-class ProductCreateView(generic.CreateView):
+class ProductCreateView(LoginRequiredMixin, generic.CreateView):
 
     form_class = CreateProductForm
     template_name = 'catalog/create_product.html'
@@ -61,7 +62,7 @@ class ProductCreateView(generic.CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(generic.UpdateView):
+class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     form_class = CreateProductForm
     template_name = 'catalog/create_product.html'
@@ -98,7 +99,7 @@ class ProductUpdateView(generic.UpdateView):
         return reverse('catalog:edit_product', args=[self.kwargs.get('product_slug')])
 
 
-class ProductDeleteView(generic.DeleteView):
+class ProductDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Product
     template_name = 'catalog/confirm_delete_product.html'
     slug_url_kwarg = 'product_slug'
