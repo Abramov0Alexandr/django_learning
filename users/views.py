@@ -1,5 +1,7 @@
 from random import randint
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
@@ -43,7 +45,7 @@ class ConfirmView(generic.TemplateView):
         return redirect('users:reg_success')
 
 
-class ProfileView(generic.UpdateView):
+class ProfileView(LoginRequiredMixin, generic.UpdateView):
     model = User
     form_class = ProfileEditForm
     success_url = reverse_lazy('users:profile_edit')
@@ -53,6 +55,7 @@ class ProfileView(generic.UpdateView):
         return self.request.user
 
 
+@login_required
 def gen_password(request):
     new_password = ''.join([str(randint(0, 9)) for _ in range(9)])
     send_mail(

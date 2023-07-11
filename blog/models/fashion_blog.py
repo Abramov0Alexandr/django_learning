@@ -12,7 +12,7 @@ class FashionBlog(models.Model):
     content = models.TextField(blank=True, verbose_name='Содержимое')
     image = models.ImageField(upload_to='images/blog', verbose_name='Превью', **NULLABLE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
-    is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
+    is_published = models.BooleanField(default=False, verbose_name='Опубликовано')
     view_count = models.IntegerField(default=0)
 
     def __str__(self):

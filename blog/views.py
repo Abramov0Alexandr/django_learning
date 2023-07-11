@@ -1,6 +1,7 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
-from django.views import generic
+from django.views import generic, View
 from blog.forms import CreatePostForm
 from blog.models import FashionBlog
 
@@ -11,7 +12,7 @@ class FashionBlogListView(generic.ListView):
     extra_context = {'title': 'SkyStore Blog'}
 
 
-class DevelopingPostsListView(generic.ListView):
+class DevelopingPostsListView(LoginRequiredMixin, generic.ListView):
     queryset = FashionBlog.objects.filter(is_published=False)
     template_name = 'blog/developing_posts.html'
     extra_context = {'title': 'В подготовке'}
@@ -33,13 +34,14 @@ class BlogDetailView(generic.DetailView):
         return post
 
 
-class AddPostCreateView(generic.CreateView):
+class PostCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateView):
+    permission_required = 'blog.add_fashionblog'
     form_class = CreatePostForm
     template_name = 'blog/add_post.html'
     extra_context = {'title': 'Администрирование', }
 
 
-class ReleasePostUpdateView(generic.UpdateView):
+class ReleasePostUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = FashionBlog
     form_class = CreatePostForm
     template_name = 'blog/add_post.html'
@@ -50,7 +52,7 @@ class ReleasePostUpdateView(generic.UpdateView):
         return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
 
 
-class PostDeleteView(generic.DeleteView):
+class PostDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = FashionBlog
     template_name = 'blog/confirm_delete_blog.html'
     slug_url_kwarg = 'blog_slug'
@@ -60,14 +62,20 @@ class PostDeleteView(generic.DeleteView):
         return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
 
 
-def toggle_published_status(request, blog_slug):
-    post = get_object_or_404(FashionBlog, slug=blog_slug)
+class TogglePublishedStatusView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = 'blog.change_fashionblog'
 
-    if post.is_published:
-        post.is_published = False
-    else:
-        post.is_published = True
+    def get(self, request, blog_slug):
+        post = get_object_or_404(FashionBlog, slug=blog_slug)
 
-    post.save()
+        if post.is_published:
+            post.is_published = False
+        else:
+            post.is_published = True
 
-    return redirect(reverse('blog:developing_posts'))
+        post.save()
+
+        if post.is_published:
+            return redirect(reverse('blog:blog'))
+        else:
+            return redirect(reverse('blog:developing_posts'))

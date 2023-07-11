@@ -21,14 +21,18 @@
                 <p class="lead"> Содержание: <br>{{ object.content|truncatechars:200 }}</p>
                 <p class="lead">Признак публикации: Пост не опубликован<br></p>
 
-                <div class="alert alert-warning" role="alert">
-                    <strong>Внимание!</strong> Проверь статью перед публикацией.
-                    <a href="{% url 'blog:release_post' object.slug %}" type="submit"
-                       class="btn btn-outline-success">Перейти к проверке</a>
-                    <a href="{% url 'blog:toggle_published_status' object.slug %}" class="btn btn-outline-warning">Опубликовать</a>
-                    <a href="{% url 'blog:post_delete' object.slug %}" class="btn btn-outline-danger">Удалить</a>
-                </div>
+                    {% if user.is_superuser or perms.blog.change_fashionblog %}
+                        <div class="alert alert-warning" role="alert">
+                        <strong>Внимание!</strong> Проверь статью перед публикацией.
+                            <a href="{% url 'blog:release_post' object.slug %}" type="submit"
+                               class="btn btn-outline-success">Перейти к проверке</a>
+                            <a href="{% url 'blog:toggle_published_status' object.slug %}" class="btn btn-outline-warning">Опубликовать</a>
+                    {% endif %}
 
+                    {% if user.is_superuser or perms.blog.delete_fashionblog %}
+                        <a href="{% url 'blog:post_delete' object.slug %}" class="btn btn-outline-danger">Удалить</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
