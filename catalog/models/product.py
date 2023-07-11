@@ -17,6 +17,7 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='Цена')
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     last_change_date = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
+    in_stock = models.BooleanField(default=False, verbose_name='В продаже')
 
     product_owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='Владелец', **NULLABLE
@@ -40,3 +41,9 @@ class Product(models.Model):
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         ordering = ('pk',)
+
+        permissions = [
+            (
+                'set_sales_status', 'Can change sales status'
+            )
+        ]
