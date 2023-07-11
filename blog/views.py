@@ -1,8 +1,7 @@
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
-from django.views import generic
+from django.views import generic, View
 from blog.forms import CreatePostForm
 from blog.models import FashionBlog
 
@@ -35,7 +34,8 @@ class BlogDetailView(generic.DetailView):
         return post
 
 
-class AddPostCreateView(LoginRequiredMixin, generic.CreateView):
+class PostCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateView):
+    permission_required = 'blog.add_fashionblog'
     form_class = CreatePostForm
     template_name = 'blog/add_post.html'
     extra_context = {'title': 'Администрирование', }
@@ -62,15 +62,20 @@ class PostDeleteView(LoginRequiredMixin, generic.DeleteView):
         return FashionBlog.objects.filter(slug=self.kwargs['blog_slug'])
 
 
-@login_required
-def toggle_published_status(request, blog_slug):
-    post = get_object_or_404(FashionBlog, slug=blog_slug)
+class TogglePublishedStatusView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = 'blog.change_fashionblog'
 
-    if post.is_published:
-        post.is_published = False
-    else:
-        post.is_published = True
+    def get(self, request, blog_slug):
+        post = get_object_or_404(FashionBlog, slug=blog_slug)
 
-    post.save()
+        if post.is_published:
+            post.is_published = False
+        else:
+            post.is_published = True
 
-    return redirect(reverse('blog:developing_posts'))
+        post.save()
+
+        if post.is_published:
+            return redirect(reverse('blog:blog'))
+        else:
+            return redirect(reverse('blog:developing_posts'))
