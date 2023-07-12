@@ -106,12 +106,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# E-mail server configuration
+# E-mail smpt configuration
 # https://docs.djangoproject.com/en/4.2/topics/email/
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'alexandr.abramovv@gmail.com'
-EMAIL_HOST_PASSWORD = 'nmmpdgdfxbasnrup'
+EMAIL_HOST_PASSWORD = 'gtqpztsrjdqytuam'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
