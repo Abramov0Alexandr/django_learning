@@ -1,7 +1,7 @@
 from django import forms
 from catalog.models import Product, Version
 
-FORBIDDEN_WORDS = 'казино, криптовалюта, крипта, биржа, дешево, бесплатно, обман, полиция, радар'
+FORBIDDEN_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
 
 class StyleFormMixin:
@@ -35,12 +35,14 @@ class CreateProductForm(StyleFormMixin, forms.ModelForm):
             'price': forms.NumberInput()
         }
 
-    def clean_description(self):
-        cleaned_data = self.cleaned_data['description']
+    def clean(self):
+        cleaned_data = super().clean()
+        title = self.cleaned_data['title']
+        description = self.cleaned_data['description']
 
-        for word in FORBIDDEN_WORDS.replace(', ', ' ').split():
-            if word.lower() in cleaned_data.lower().split():
-                raise forms.ValidationError('Обнаружены недопустимые слова в описании')
+        for word in FORBIDDEN_WORDS:
+            if word.lower() in description.lower() or word.lower() in title.lower():
+                raise forms.ValidationError('Обнаружены недопустимые слова')
 
         return cleaned_data
 
