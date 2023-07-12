@@ -9,13 +9,11 @@ from blog.models import FashionBlog
 class FashionBlogListView(generic.ListView):
     queryset = FashionBlog.objects.filter(is_published=True)
     template_name = 'blog/blog.html'
-    extra_context = {'title': 'SkyStore Blog'}
 
 
 class DevelopingPostsListView(LoginRequiredMixin, generic.ListView):
     queryset = FashionBlog.objects.filter(is_published=False)
     template_name = 'blog/developing_posts.html'
-    extra_context = {'title': 'В подготовке'}
 
 
 class BlogDetailView(generic.DetailView):
@@ -38,14 +36,12 @@ class PostCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.Create
     permission_required = 'blog.add_fashionblog'
     form_class = CreatePostForm
     template_name = 'blog/add_post.html'
-    extra_context = {'title': 'Администрирование', }
 
 
 class ReleasePostUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = FashionBlog
     form_class = CreatePostForm
     template_name = 'blog/add_post.html'
-    extra_context = {'title': 'Администрирование', }
     slug_url_kwarg = 'blog_slug'
 
     def get_queryset(self):
