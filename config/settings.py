@@ -120,12 +120,26 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
-# Configure Internal IPs
+# Configure Internal IPs for django-debug-toolbar
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#configure-internal-ips
 
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+
+# Setting up the cache
+# https://docs.djangoproject.com/en/4.2/topics/cache/#redis
+
+CACHE_ENABLED = True
+
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": "redis://127.0.0.1:6379",
+        }
+    }
 
 
 # Internationalization
