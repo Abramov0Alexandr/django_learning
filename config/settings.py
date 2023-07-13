@@ -41,9 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -114,6 +118,14 @@ EMAIL_HOST_USER = 'alexandr.abramovv@gmail.com'
 EMAIL_HOST_PASSWORD = 'gtqpztsrjdqytuam'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+# Configure Internal IPs
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#configure-internal-ips
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 
 # Internationalization
