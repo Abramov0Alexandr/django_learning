@@ -4,6 +4,21 @@
 SkyStore
 {% endblock %}
 {% block content %}
+
+{% if cat_selected == 0 %}
+    <li class="selected">Все категории</li>
+{% else %}
+    <li><a href="{% url 'catalog:homepage' %}">Все категории</a></li>
+{% endif %}
+
+{% for c in cats %}
+         {% if c.pk == cat_selected %}
+                   <li class="selected">{{c.title}}</li>
+         {% else %}
+                   <li><a href="{{ c.get_absolute_url }}">{{c.title}}</a></li>
+         {% endif %}
+{% endfor %}
+
 {% for object in object_list %}
 <div class="col-12 col-md-4">
     <div class="row mt-3">

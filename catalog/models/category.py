@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse_lazy
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -11,6 +11,9 @@ class Category(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+    def get_absolute_url(self):
+        return reverse_lazy('catalog:show_category', kwargs={'cat_id': self.pk})
 
     class Meta:
         verbose_name = 'Категория'
