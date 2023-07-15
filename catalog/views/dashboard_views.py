@@ -1,10 +1,11 @@
 from django.views import generic
-from catalog.models import Product, Category
+from catalog.models import Product
+from catalog.services import get_category_cache
 
 
 class IndexListView(generic.ListView):
     queryset = Product.objects.all()
-    cats = Category.objects.all()
+    cats = get_category_cache()
     template_name = 'catalog/index.html'
     extra_context = {'cats': cats,
                      'cat_selected': 0}
