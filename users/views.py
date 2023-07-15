@@ -9,6 +9,7 @@ from django.views import generic
 from config import settings
 from users.forms import UserRegistrationForm, ProfileEditForm
 from users.models import User
+from users.services import send_new_password
 
 
 class RegistrationView(generic.CreateView):
@@ -58,14 +59,8 @@ class ProfileView(LoginRequiredMixin, generic.UpdateView):
 @login_required
 def gen_password(request):
     new_password = ''.join([str(randint(0, 9)) for _ in range(9)])
-    send_mail(
-        subject='Ваш пароль был изменен',
-        message=f'Ваш новый пароль для авторизации в личном кабинете {new_password}.\n'
-                f'После смены пароля вам необходимо заново авторизоваться.',
-        from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[request.user.email]
-    )
     request.user.set_password(new_password)
     request.user.save()
+    send_new_password(request.user.email, new_password)
     return redirect(reverse('users:login'))
 
