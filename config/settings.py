@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
@@ -41,9 +44,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -82,7 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'hw_db',
         'USER': 'postgres',
-        'PASSWORD': '661104',
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
     }
 }
 
@@ -106,14 +113,37 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# E-mail server configuration
+# E-mail smpt configuration
 # https://docs.djangoproject.com/en/4.2/topics/email/
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'alexandr.abramovv@gmail.com'
-EMAIL_HOST_PASSWORD = 'nmmpdgdfxbasnrup'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+# Configure Internal IPs for django-debug-toolbar
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#configure-internal-ips
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+
+# Setting up the cache
+# https://docs.djangoproject.com/en/4.2/topics/cache/#redis
+
+CACHE_ENABLED = os.getenv('CACHE_ENABLED') == 'True'
+
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": "redis://127.0.0.1:6379",
+            "TIMEOUT": 300,
+        }
+    }
 
 
 # Internationalization

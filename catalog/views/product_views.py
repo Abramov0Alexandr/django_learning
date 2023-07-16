@@ -1,17 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.forms import inlineformset_factory
 from django.http import Http404
-from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
-from django.views import generic, View
+from django.views import generic
 from catalog.forms import CreateProductForm, VersionForm
 from catalog.models import Product, Version
-
-
-class IndexListView(generic.ListView):
-    queryset = Product.objects.all()
-    template_name = 'catalog/index.html'
-    extra_context = {'title': 'SkyStore', }
 
 
 class ProductDetailView(generic.DetailView):
@@ -19,13 +12,6 @@ class ProductDetailView(generic.DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
     slug_url_kwarg = 'product_slug'
-
-    def get_queryset(self):
-        return Product.objects.filter(slug=self.kwargs['product_slug'])
-
-
-class ContactsView(generic.TemplateView):
-    template_name = 'catalog/contacts.html'
 
 
 class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateView):
@@ -102,7 +88,7 @@ class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, generic.Upd
     def get_object(self, queryset=None):
 
         self.object = super().get_object(queryset)
-        if self.object.product_owner != self.request.user:
+        if self.object.product_owner != self.request.user and not self.request.user.is_superuser:
             raise Http404
         return self.object
 
@@ -119,27 +105,3 @@ class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, generic.Del
 
     def get_queryset(self):
         return Product.objects.filter(slug=self.kwargs['product_slug'])
-
-
-class ToggleSalesStatusView(LoginRequiredMixin, PermissionRequiredMixin, View):
-    permission_required = 'catalog.set_sales_status'
-
-    def get_object(self, queryset=None):
-        product_slug = self.kwargs.get('product_slug')
-        product = get_object_or_404(Product, slug=product_slug)
-
-        if product.product_owner != self.request.user:
-            raise Http404
-
-        return product
-
-    def get(self, request, product_slug):
-        product = self.get_object()
-
-        if product.in_stock:
-            product.in_stock = False
-        else:
-            product.in_stock = True
-        product.save()
-
-        return redirect(reverse('catalog:homepage'))
